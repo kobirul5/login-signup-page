@@ -1,6 +1,7 @@
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import React, { useState } from 'react';
 import { auth } from '../firebase/firebase.init';
+import { NavLink } from 'react-router-dom';
 
 const SignUp = () => {
     const [successMessage, setSuccessMessage] = useState(false)
@@ -76,8 +77,9 @@ const SignUp = () => {
                         </div>
 
                     <div className="form-control mt-6">
-                        <button className="btn btn-primary">Login</button>
+                        <button className="btn btn-primary">Sign UP</button>
                     </div>
+                    <div><NavLink className="bg-red-200" to="/login">New to the website please login?</NavLink></div>
                 </form>
             </div>
         </div>
