@@ -1,11 +1,11 @@
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
 import React, { useState } from 'react';
 import { auth } from '../firebase/firebase.init';
 import { NavLink } from 'react-router-dom';
 
 const SignUp = () => {
     const [successMessage, setSuccessMessage] = useState(false)
-    const [errorMessage, setErrorMessage] = useState()
+    const [errorMessage, setErrorMessage] = useState("")
     const handleSignUp = e => {
         e.preventDefault()
         const email = e.target.email.value
@@ -35,6 +35,10 @@ const SignUp = () => {
             .then(result => {
                 console.log(result.user)
                 setSuccessMessage(true)
+                sendEmailVerification(auth.currentUser)
+                .then(()=>{
+                    console.log("sent email verification")
+                })
             })
             .catch(error => {
                 console.log('ERROR', error.message)
